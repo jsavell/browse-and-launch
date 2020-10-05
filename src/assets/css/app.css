@@ -1,0 +1,27 @@
+body {
+  background-color: #dfdfdf;
+  font-family: Arial;
+  font-size: 10pt;
+}
+
+.movie img {
+  border: 1px solid #555;
+  background-color: #114f77;
+  width: 107px;
+  height: 160px;
+  overflow: hidden;
+}
+
+.list-view .movie {
+  min-height: 200px;
+  margin-bottom:6px;
+  border-bottom:1px solid #555;
+}
+
+.grid-view .movie {
+  float:left;
+  width:107px;
+  height:160px;
+  margin-right:10px;
+  margin-bottom:10px;
+}

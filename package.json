@@ -1,0 +1,21 @@
+{
+  "name": "movie-launcher",
+  "version": "0.0.1",
+  "description": "Browse movies and launch them!",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "npm run build && electron ./dist/electron/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jason Savell",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^7.1.5",
+    "typescript": "^3.7.3"
+  },
+  "dependencies": {
+    "@types/node": "12.12.21",
+    "peer-dial": "0.0.8"
+  }
+}
