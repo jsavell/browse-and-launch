@@ -4,6 +4,10 @@ body {
   font-size: 10pt;
 }
 
+.movie a.do-launch {
+  display: block;
+}
+
 .movie img {
   border: 1px solid #555;
   background-color: #114f77;

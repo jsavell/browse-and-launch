@@ -2,6 +2,7 @@ import {app, BrowserWindow, ipcMain} from 'electron';
 import {IpcChannelInterface} from "./IPC/IpcChannelInterface";
 import {MoviesChannel} from "./IPC/MoviesChannel";
 import {DevicesChannel} from "./IPC/DevicesChannel";
+import {LauncherChannel} from "./IPC/LauncherChannel";
 
 
 class Main {
@@ -49,5 +50,6 @@ class Main {
 
 (new Main()).init([
   new MoviesChannel(),
-  new DevicesChannel()
+  new DevicesChannel(),
+  new LauncherChannel()
 ]);
