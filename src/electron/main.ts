@@ -3,7 +3,7 @@ import {IpcChannelInterface} from "./IPC/IpcChannelInterface";
 import {MoviesChannel} from "./IPC/MoviesChannel";
 import {DevicesChannel} from "./IPC/DevicesChannel";
 import {LauncherChannel} from "./IPC/LauncherChannel";
-
+const { is } = require('electron-util');
 
 class Main {
   private mainWindow: BrowserWindow;
@@ -34,12 +34,15 @@ class Main {
       frame: false,
       title: `Movie Launcher`,
       webPreferences: {
-        nodeIntegration: true
+        nodeIntegration: true,
+        devTools: is.development
       }
     });
     this.mainWindow.maximize();
     this.mainWindow.show();
-    this.mainWindow.webContents.openDevTools();
+    if (is.development) {
+      this.mainWindow.webContents.openDevTools();
+    }
     this.mainWindow.loadFile('../../index.html');
   }
 

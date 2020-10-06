@@ -2,6 +2,7 @@ import {IpcChannelInterface} from "./IpcChannelInterface";
 import {IpcMainEvent} from 'electron';
 import {IpcRequest} from "../../shared/IpcRequest";
 import {execSync} from "child_process";
+import {MovieGroup} from "../model/MovieGroup";
 import {Movie} from "../model/Movie";
 
 export class MoviesChannel implements IpcChannelInterface {
@@ -21,7 +22,7 @@ export class MoviesChannel implements IpcChannelInterface {
 		  protocol: 'http:',
 		  hostname: 'localhost',
 		  port: 8983,
-		  path: '/solr/movies/select?q=*%3A*&rows=600&sort=title_ss%20asc'
+		  path: '/solr/movies/select?q=*%3A*&rows=1000&sort=title_ss%20asc'
 		})
 
 
@@ -32,12 +33,27 @@ export class MoviesChannel implements IpcChannelInterface {
 	    })
 	    response.on('end', () => {
 	      	let solrData = JSON.parse(data);
-	      	var movies:Movie[] = [];
+	      	let movieGroupsBuilder:Map<string,MovieGroup> = new Map();
 	      	for (let movieData of solrData.response.docs) {
-	      		let movie = {title: movieData.title_ss,description: movieData.description_ss,thumbnail: movieData.thumbnail_ss, url: movieData.url_ss};
-	      		movies.push(movie);
+	      		let movie = {title: movieData.title_ss,description: movieData.description_ss,thumbnail: movieData.thumbnail_ss, url: movieData.url_ss, quality: movieData.quality_ss, group: movieData.group_ss};
+	      		let groupId = movie.url;
+
+	      		if (movie.group) {
+	      			groupId = movie.group;
+	      		}
+
+	      		if (!movieGroupsBuilder.has(String(groupId))) {
+	      			movieGroupsBuilder.set(String(groupId), {id: groupId,movies: [movie]});
+	      		} else {
+	      			movieGroupsBuilder.get(String(groupId)).movies.push(movie);
+	      		}
 	      	}
-	    	event.sender.send(request.responseChannel, { movies: movies });
+
+	      	let movieGroups:MovieGroup[] = [];
+	      	movieGroupsBuilder.forEach(function (v,k,m) {
+	      		movieGroups.push(v);
+	      	});
+	    	event.sender.send(request.responseChannel, { movieGroups:movieGroups });
 	    })
 	  })
 	  movieRequest.end()

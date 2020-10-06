@@ -7,10 +7,24 @@
   <link rel="stylesheet" href="./src/assets/css/app.css" type="text/css" />
 </head>
 <body>
-<button id="list-dial-devices">List Devices</button>
-<div id="devices"></div>
-<button id="request-movies">Get Movies</button>
-<div id="movies"></div>
+<span id="settingsMenuLauncher">settings</span>
+
+<div id="main">
+  <div id="movies"></div>
+
+  <div id="settingsMenu" class="sidenav">
+    <a id="closeSettingsMenu" class="closebtn">&times;</a>
+    <ul class="options">
+      <li>
+        <button id="list-dial-devices">List Launch Devices</button>
+        <div id="devices"></div>
+      </li>
+      <li>
+        <button id="request-movies">Refresh Movies</button>
+      </li>
+    </ul>
+  </div>
+</div>
 <script>
   require('./dist/app/app.js');
 </script>

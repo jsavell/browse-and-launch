@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@types/node": "12.12.21",
+    "electron-util": "^0.14.2",
     "peer-dial": "0.0.8"
   }
 }
