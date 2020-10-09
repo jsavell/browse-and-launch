@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "description": "Browse movies and launch them!",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
+    "copyAssets": "cp -r ./src/assets ./dist",
+    "build": "npm run copyAssets && tsc",
+    "watch": "npm run copyAssets && tsc -w",
     "start": "npm run build && electron ./dist/electron/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dist": "electron-builder"
