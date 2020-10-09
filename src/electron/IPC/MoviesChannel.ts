@@ -20,7 +20,7 @@ export class MoviesChannel implements IpcChannelInterface {
 	const movieRequest = net.request({
 		  method: 'GET',
 		  protocol: 'http:',
-		  hostname: 'localhost',
+		  hostname: '192.168.1.110',
 		  port: 8983,
 		  path: '/solr/movies/select?q=*%3A*&rows=1000&sort=title_ss%20asc'
 		})

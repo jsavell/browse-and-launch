@@ -43,7 +43,7 @@ class Main {
     if (is.development) {
       this.mainWindow.webContents.openDevTools();
     }
-    this.mainWindow.loadFile('../../index.html');
+    this.mainWindow.loadFile(__dirname+'/../assets/html/index.html');
   }
 
   private registerIpcChannels(ipcChannels: IpcChannelInterface[]) {

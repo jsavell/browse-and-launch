@@ -6,17 +6,39 @@
     "build": "tsc",
     "watch": "tsc -w",
     "start": "npm run build && electron ./dist/electron/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "electron-builder"
   },
-  "author": "Jason Savell",
+  "author": "Jason Savell <contact@shadowater.com>",
   "license": "MIT",
   "devDependencies": {
     "electron": "^7.1.5",
+    "electron-builder": "^22.8.1",
     "typescript": "^3.7.3"
   },
   "dependencies": {
     "@types/node": "12.12.21",
     "electron-util": "^0.14.2",
     "peer-dial": "0.0.8"
+  },
+  "main": "dist/electron/main.js",
+  "build": {
+    "appId": "browse-and-launch",
+    "linux": {
+    "category": "Video Browser",
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "files": [
+      "dist",
+      "node_modules",
+      "package.json"
+    ],
+    "directories": {
+      "output": "package"
+    },
+    "extraResources": ["./src/assets/**/*"]
   }
 }
