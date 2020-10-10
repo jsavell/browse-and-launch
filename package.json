@@ -8,8 +8,8 @@
     "watch": "npm run copyAssets && tsc -w",
     "start": "npm run build && electron ./dist/electron/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "distArm": "electron-builder --dir --armv7l --linux AppImage",
-    "dist": "electron-builder"
+    "distArm": "npm run build && electron-builder --dir --armv7l --linux AppImage",
+    "dist": "npm run build && electron-builder"
   },
   "author": "Jason Savell <contact@shadowater.com>",
   "license": "GPL-3.0-only",
