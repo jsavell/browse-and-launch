@@ -22,20 +22,16 @@ body {
   height: 148px;
 }
 
-.list-view .movie {
-  min-height: 200px;
-  margin-bottom:6px;
-  border-bottom:1px solid #555;
+.grid-view {
+  margin: 1em 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid: auto-flow / repeat(auto-fit, minmax(107px, 107px));
+  align-items: baseline;
+  grid-gap: 10px;
+  gap: 10px;
 }
-
-.grid-view .movie {
-  float:left;
-  width:107px;
-  height:158px;
-  margin-right:10px;
-  margin-bottom:10px;
-}
-
 
 .sidenav {
   height: 100%;
