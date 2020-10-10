@@ -56,7 +56,7 @@ let buildLetterNav = function():string {
   while (n<=25) {
     let letter = String.fromCharCode(65 + n);
     letterNav += "<li><a target='_self' href='#"+letter+"'>"+letter+"</a></li>";
-    n = n+4;
+    n = n+1;
   }
   letterNav += "</ul>";
   return letterNav;

@@ -43,6 +43,12 @@ body::-webkit-scrollbar {
   right: 0;
   padding: 4px 8px;
   width: 60px;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+#letterJumper::-webkit-scrollbar {
+  display: none;
 }
 
 #letterJumper ul {
