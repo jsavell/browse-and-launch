@@ -16,13 +16,12 @@ export class MoviesChannel implements IpcChannelInterface {
     }
 
 	const {net} = require('electron');
-
 	const movieRequest = net.request({
 		  method: 'GET',
 		  protocol: 'http:',
-		  hostname: '192.168.1.110',
-		  port: 8983,
-		  path: '/solr/movies/select?q=*%3A*&rows=1000&sort=title_ss%20asc'
+		  hostname: process.env.SOLR_HOST,
+		  port: Number(process.env.SOLR_PORT),
+		  path: '/solr/'+process.env.SOLR_CORE+'/select?q='+process.env.SOLR_FILTER+'&rows='+process.env.SOLR_ROW_COUNT+'&sort=title_ss%20asc'
 		})
 
 

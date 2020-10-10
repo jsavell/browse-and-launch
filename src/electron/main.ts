@@ -10,6 +10,7 @@ class Main {
   private mainWindow: BrowserWindow;
 
   public init(ipcChannels: IpcChannelInterface[]) {
+    require('dotenv').config();
     app.on('ready', this.createWindow);
     app.on('window-all-closed', this.onWindowAllClosed);
     app.on('activate', this.onActivate);
