@@ -4,6 +4,10 @@ body {
   font-size: 10pt;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .movie {
   border: 1px solid #555;
   background-color: #114f77;
@@ -31,4 +35,53 @@ body {
   align-items: baseline;
   grid-gap: 10px;
   gap: 10px;
+}
+
+#letterJumper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 4px 8px;
+  width: 60px;
+}
+
+#letterJumper ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding-inline-start: 0;
+}
+
+#letterJumper ul li {
+  margin-bottom: 24px;
+}
+
+#letterJumper ul li a {
+  border: 1px solid #555;
+  border-radius: 4px;
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 2em;
+  text-decoration: none;
+  font-weight: bold;
+  color: #efefef;
+  background-color: #114f77;
+  height: 28px;
+  padding: 16px 0;
+  text-shadow: -1px 1px 0 #555,
+          1px 1px 0 #555,
+         1px -1px 0 #555;
+        -1px -1px 0 #555;
+}
+
+.letter-anchor {
+  color: #555;
+  font-size: 1.4em;
+  font-weight: 500;
+  font-style: oblique;
 }

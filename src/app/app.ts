@@ -13,7 +13,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const data = await ipc.send<{ movieGroups: MovieGroup[] }>('movies-data');
   let movieHtml:string = gridView(data.movieGroups);
   document.getElementById('movies').innerHTML = movieHtml;
+
+  document.getElementById("letterJumper").innerHTML = buildLetterNav();
+
 });
+
 
 let rootElement = document.querySelector('body');
   rootElement.addEventListener('click',function(event:any){
@@ -46,27 +50,53 @@ let detailsView = function(movieGroups:MovieGroup[]):string {
   return movieHtml;
 };*/
 
+let buildLetterNav = function():string {
+  let letterNav = "<ul><li><a target='_self' href='#numbers'>0</a></li>";
+
+  let n = 0;
+  while (n<=25) {
+    let letter = String.fromCharCode(65 + n);
+    letterNav += "<li><a target='_self' href='#"+letter+"'>"+letter+"</a></li>";
+    n = n+4;
+  }
+  letterNav += "</ul>";
+  return letterNav;
+};
+
+let insertLetterAnchor = function(letter:string, label:string) {
+  return '<div class="letter-anchor" id="'+letter+'">'+label+'</div>';
+};
+
 let gridView = function(movieGroups:MovieGroup[]):string {
-  let movieHtml = "<div class='grid-view'>";
+  let movieHtml = "";
+  let lastLetterEntry:string = "0123...";
+  movieHtml += insertLetterAnchor('numbers', lastLetterEntry);
+  movieHtml += "      <div class='grid-view'>";
   for (let movieGroup of movieGroups) {
-    let movie = movieGroup.movies[0];
-    let movieCount = movieGroup.movies.length;
+    let movie:Movie = movieGroup.movies[0];
+    let movieCount:Number = movieGroup.movies.length;
+    let firstChar:string = new String(movie.title).charAt(0);
+    if (firstChar.match(/\p{Letter}/gu) && !firstChar.match(lastLetterEntry)) {
+      movieHtml += '  </div>';
+      movieHtml += insertLetterAnchor(firstChar, firstChar);
+      movieHtml += "  <div class='grid-view'>";
+      lastLetterEntry = firstChar;
+    }
     if (movieCount == 1) {
       movieHtml +=
-            "<div class='movie' style='background-image:url("+movie.thumbnail+")'>"+
-            "  <a class='do-launch' href='"+movie.url+"' target='_blank'></a>"+
-            "  <div class='details'>"+movie.quality+"</div>"+
-            "</div>";
+            "          <div class='movie' style='background-image:url("+movie.thumbnail+")'>"+
+            "            <a class='do-launch' href='"+movie.url+"' target='_blank'></a>"+
+            "            <div class='details'>"+movie.quality+"</div>"+
+            "          </div>";
     } else {
       movieHtml +=
-            "<div class='movie' style='background-image:url("+movie.thumbnail+")'>"+
-            "  <a class='do-launch' href='"+movie.url+"' target='_blank'></a>"+
-            "  <div class='details'>"+movie.quality+" "+movieCount+"</div>"+
-            "</div>";
+            "          <div class='movie' style='background-image:url("+movie.thumbnail+")'>"+
+            "            <a class='do-launch' href='"+movie.url+"' target='_blank'></a>"+
+            "            <div class='details'>"+movie.quality+" "+movieCount+"</div>"+
+            "          </div>";
     }
   }
-  movieHtml += '</div>';
-
+  movieHtml += '      </div>';
   return movieHtml;
 };
 
