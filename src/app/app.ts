@@ -1,7 +1,6 @@
 import {IpcService} from "./IpcService";
 import {Movie} from "../electron/model/Movie";
 import {MovieGroup} from "../electron/model/MovieGroup";
-import {Device} from "../electron/model/Device";
 
 const ipc = new IpcService();
 
@@ -100,11 +99,3 @@ let gridView = function(movieGroups:MovieGroup[]):string {
   return movieHtml;
 };
 
-let listDevices = function(device:Device):string {
-  let deviceHtml = "<ul>";
-//  for (let device of devices) {
-    deviceHtml += "<li>"+device.name+"</li>";
-//  }
-  deviceHtml += "</ul>";
-  return deviceHtml;
-}
