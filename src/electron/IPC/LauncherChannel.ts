@@ -14,38 +14,19 @@ export class LauncherChannel implements IpcChannelInterface {
       request.responseChannel = `${this.getName()}_response`;
     }
 
-	const {net} = require('electron');
+    const {net} = require('electron');
 
-	let launchUrl:string = request.params[0];
-  let contentID = encodeURIComponent(launchUrl);
-  console.log(contentID);
-  const launchRequest = net.request({
-      method: 'POST',
-      protocol: 'http:',
-      hostname: '192.168.1.143',
-      port: 8060,
-      path: 'launch/dev?mediaType=movie&contentID='+contentID
-    });
+    let contentID = encodeURIComponent(request.params[0]);
+    let launchUrl = process.env.LAUNCH_PARAMS.replace('{content-url}',contentID);
 
-  launchRequest.end();
-/*
+    const launchRequest = net.request({
+            method: 'POST',
+            protocol: 'http:',
+            hostname: process.env.LAUNCH_HOST,
+            port: Number(process.env.LAUNCH_PORT),
+            path: launchUrl
+          });
 
-	movieRequest.on('response', (response) => {
-	    let data = '';
-	    response.on('data', (chunk) => {
-	        data += chunk;
-	    })
-	    response.on('end', () => {
-	      	let solrData = JSON.parse(data);
-	      	var movies:Movie[] = [];
-	      	for (let movieData of solrData.response.docs) {
-	      		let movie = {title: movieData.title_ss,description: movieData.description_ss,thumbnail: movieData.thumbnail_ss, url: movieData.url_ss};
-	      		movies.push(movie);
-	      	}
-	    	event.sender.send(request.responseChannel, { movies: movies });
-	    })
-	  })
-	  movieRequest.end()*/
+    launchRequest.end();
   }
-
 }

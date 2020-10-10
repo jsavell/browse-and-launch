@@ -5,6 +5,10 @@ import {Device} from "../electron/model/Device";
 
 const ipc = new IpcService();
 
+var isLaunchable = function() {
+  return (process.env.LAUNCH_HOST && process.env.LAUNCH_PORT && process.env.LAUNCH_PARAMS);
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
   const data = await ipc.send<{ movieGroups: MovieGroup[] }>('movies-data');
   let movieHtml:string = gridView(data.movieGroups);
@@ -22,7 +26,7 @@ let rootElement = document.querySelector('body');
   rootElement.addEventListener('click',function(event:any){
 
     const launcher = event.target.closest("a.do-launch");
-    if (!launcher) {
+    if (!isLaunchable() || !launcher) {
       return;
     }
     event.preventDefault();
