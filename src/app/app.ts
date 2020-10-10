@@ -27,25 +27,6 @@ let rootElement = document.querySelector('body');
     ipc.send<{}>('launcher-data',{responseChannel:'none',params:[launcher.getAttribute("href")]});
 });
 
-
-document.getElementById('settingsMenuLauncher').addEventListener('click',
-  function() {
-    document.getElementById("settingsMenu").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-    document.getElementById("movies").style.transition = "opacity ease 1s";
-    document.getElementById("movies").style.opacity = ".2";
-  });
-
-document.getElementById('closeSettingsMenu').addEventListener('click',
-  function() {
-    document.getElementById("settingsMenu").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-    document.body.style.backgroundColor = "#efefef";
-    document.getElementById("movies").style.transition = "opacity ease 1s";
-    document.getElementById("movies").style.opacity = "1";
-  });
-
 /*
 let detailsView = function(movieGroups:MovieGroup[]):string {
   let movieHtml = "<div class='list-view'>";
