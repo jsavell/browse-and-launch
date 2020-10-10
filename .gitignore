@@ -1,4 +1,5 @@
-.env
+src/assets/.env
+
 .idea
 node_modules
 dist

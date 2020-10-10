@@ -9,7 +9,8 @@ class Main {
   private mainWindow: BrowserWindow;
 
   public init(ipcChannels: IpcChannelInterface[]) {
-    require('dotenv').config();
+    require('dotenv').config({ path: __dirname+'/../assets/.env'});
+
     app.on('ready', this.createWindow);
     app.on('window-all-closed', this.onWindowAllClosed);
     app.on('activate', this.onActivate);
