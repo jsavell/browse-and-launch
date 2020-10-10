@@ -1,7 +1,6 @@
 import {app, BrowserWindow, ipcMain} from 'electron';
 import {IpcChannelInterface} from "./IPC/IpcChannelInterface";
 import {MoviesChannel} from "./IPC/MoviesChannel";
-import {DevicesChannel} from "./IPC/DevicesChannel";
 import {LauncherChannel} from "./IPC/LauncherChannel";
 const { is } = require('electron-util');
 const TouchscreenWindow = require('electron-touchscreen');
@@ -55,6 +54,5 @@ class Main {
 
 (new Main()).init([
   new MoviesChannel(),
-  new DevicesChannel(),
   new LauncherChannel()
 ]);

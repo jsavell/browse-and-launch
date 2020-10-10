@@ -15,13 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('movies').innerHTML = movieHtml;
 });
 
-
-document.getElementById('list-dial-devices').addEventListener('click', async () => {
-	const data = await ipc.send<{ device: Device }>('devices-data');
-  let deviceHtml:string = listDevices(data.device);
-  document.getElementById('devices').innerHTML = deviceHtml;
-});
-
 let rootElement = document.querySelector('body');
   rootElement.addEventListener('click',function(event:any){
 

@@ -12,18 +12,17 @@
     "dist": "electron-builder"
   },
   "author": "Jason Savell <contact@shadowater.com>",
-  "license": "GPL",
+  "license": "GPL-3.0-only",
   "devDependencies": {
-    "electron": "^7.1.5",
+    "electron": "^7.3.3",
     "electron-builder": "^22.8.1",
-    "typescript": "^3.7.3"
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "@types/node": "12.12.21",
     "dotenv": "^8.2.0",
     "electron-touchscreen": "0.0.11",
-    "electron-util": "^0.14.2",
-    "peer-dial": "0.0.8"
+    "electron-util": "^0.14.2"
   },
   "main": "dist/electron/main.js",
   "build": {
