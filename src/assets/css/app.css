@@ -113,7 +113,7 @@ a {
 .panel-grid {
   display: grid;
   grid-template-columns: 10fr 1fr;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: 100% repeat(4, 1fr);
   grid-column-gap: 7px;
   grid-row-gap: 0px;
   box-shadow: 1px 1px 10px #555;
@@ -149,6 +149,11 @@ a {
 #movieDetail .content {
   padding: 30px;
   padding-right: 10px;
+  overflow-y: scroll;
+}
+
+#movieDetail .content::-webkit-scrollbar {
+  display: none;
 }
 
 #movieDetail .content ul {
