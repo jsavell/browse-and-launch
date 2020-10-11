@@ -23,7 +23,7 @@ rootElement.addEventListener('click',function(event:any) {
   event.preventDefault();
   const movieDetails = document.getElementById(event.target.getAttribute('href').replace("#",""));
   let movieDetailElement:Element = document.getElementById('movieDetail');
-  movieDetailElement.children[1].innerHTML = movieDetails.innerHTML;
+  movieDetailElement.children[0].children[0].innerHTML = movieDetails.innerHTML;
   movieDetailElement.classList.add('active');
   return;
 });
@@ -94,7 +94,7 @@ let detailView = function(movieGroup:MovieGroup):string {
           "    <img src='"+movie.thumbnail+"' />"+
           "  </div>"+
           "  <h3>"+movie.title+"</h3>"+
-          "  <p>"+movie.description+"</p>"+
+          "  <p>"+((movie.description) ? movie.description:'')+"</p>"+
           "</div>";
   movieHtml += '<div class="play-button-wrap">'+
                '  <a class="button play-movie" href="'+movie.url+'" target="_blank">Play</a>'+

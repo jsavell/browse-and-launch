@@ -110,10 +110,21 @@ a {
   font-style: oblique;
 }
 
+.panel-grid {
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 7px;
+  grid-row-gap: 0px;
+  box-shadow: 1px 1px 10px #555;
+  background-color: #fff;
+  width: 40%;
+  height : 100%;
+}
+
 #closeMovieDetail {
   display: block;
-  height: 30px;
-  text-align: center;
+  height: 100%;
 }
 
 #movieDetail {
@@ -136,11 +147,8 @@ a {
 }
 
 #movieDetail .content {
-  box-shadow: 1px 1px 10px #555;
-  background-color: #fff;
-  width: 30%;
-  height : 100%;
   padding: 30px;
+  padding-right: 10px;
 }
 
 #movieDetail .content ul {
@@ -172,9 +180,8 @@ a {
 
 #movieDetail .details .image {
   float:left;
-  width:107px;
-  height:160px;
   margin-right:20px;
+  margin-bottom: 15px;
 }
 
 #movieDetail .details .image img {
