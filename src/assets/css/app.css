@@ -1,11 +1,22 @@
+html {
+  height: 100%;
+}
+
 body {
   background-color: #dfdfdf;
   font-family: Arial;
   font-size: 10pt;
+  height: 100%;
+  color: #1c1b23;
 }
 
 body::-webkit-scrollbar {
   display: none;
+}
+
+a {
+  color: #114f77;
+  text-decoration: none;
 }
 
 .movie {
@@ -13,17 +24,21 @@ body::-webkit-scrollbar {
   background-color: #114f77;
 }
 
-.movie .details {
+.movie .detail-strip {
   height: 10px;
   background-color: #555;
   color: #efefef;
   font-size: 70%;
 }
 
-.movie a.do-launch {
+.movie a.show-details {
   display: block;
   width: 100%;
   height: 148px;
+}
+
+.movie .extras {
+  display: none;
 }
 
 .grid-view {
@@ -35,6 +50,9 @@ body::-webkit-scrollbar {
   align-items: baseline;
   grid-gap: 10px;
   gap: 10px;
+}
+
+#movies {
 }
 
 #letterJumper {
@@ -90,4 +108,104 @@ body::-webkit-scrollbar {
   font-size: 1.4em;
   font-weight: 500;
   font-style: oblique;
+}
+
+#closeMovieDetail {
+  display: block;
+  height: 30px;
+  text-align: center;
+}
+
+#movieDetail {
+  background-color: transparent;
+  width: 0%;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  height : 100%;
+  -webkit-transition: all 1s, -webkit-transform 1s;
+  transition: all 1s, transform 1s;
+}
+
+#movieDetail.active {
+  left: 0;
+  -webkit-transition: all 1s, -webkit-transform 1s;
+  transition: all 1s, transform 1s;
+  width:100%;
+  height:100%;
+}
+
+#movieDetail .content {
+  box-shadow: 1px 1px 10px #555;
+  background-color: #fff;
+  width: 30%;
+  height : 100%;
+  padding: 30px;
+}
+
+#movieDetail .content ul {
+  list-style: none;
+  margin: 20px 0 30px 0;
+  padding: 0;
+  font-size: 1.2em;
+}
+
+#movieDetail .content li {
+  padding: 8px;
+}
+
+#movieDetail .content li a {
+  background-image: url('../images/play.svg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: 20px 20px;
+  display: block;
+  padding-left: 34px;
+  padding-top: 4px;
+  min-height: 20px;
+}
+
+#movieDetail .details {
+  clear:both;
+  min-height: 210px;
+}
+
+#movieDetail .details .image {
+  float:left;
+  width:107px;
+  height:160px;
+  margin-right:20px;
+}
+
+#movieDetail .details .image img {
+  border:1px solid #555;
+}
+
+.play-button-wrap {
+  margin-top: 10px;
+  clear:both;
+}
+
+.play-button-wrap .button {
+  font-size: 2em;
+  height: 28px;
+  padding: 16px 0;
+}
+
+.button {
+  border: 1px solid #555;
+  border-radius: 4px;
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  text-decoration: none;
+  font-weight: bold;
+  color: #efefef;
+  background-color: #114f77;
+  padding: 6px 0;
+  text-shadow: -1px 1px 0 #555,
+          1px 1px 0 #555,
+         1px -1px 0 #555;
+        -1px -1px 0 #555;
 }

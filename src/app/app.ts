@@ -18,36 +18,30 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-let rootElement = document.querySelector('body');
-  rootElement.addEventListener('click',function(event:any){
-
-    const launcher = event.target.closest("a.do-launch");
-    if (!isLaunchable() || !launcher) {
-      return;
-    }
-    event.preventDefault();
-
-    ipc.send<{}>('launcher-data',{responseChannel:'none',params:[launcher.getAttribute("href")]});
+let rootElement = document.getElementById("movies");
+rootElement.addEventListener('click',function(event:any) {
+  event.preventDefault();
+  const movieDetails = document.getElementById(event.target.getAttribute('href').replace("#",""));
+  let movieDetailElement:Element = document.getElementById('movieDetail');
+  movieDetailElement.children[1].innerHTML = movieDetails.innerHTML;
+  movieDetailElement.classList.add('active');
+  return;
 });
 
-/*
-let detailsView = function(movieGroups:MovieGroup[]):string {
-  let movieHtml = "<div class='list-view'>";
-  for (let movie of movies) {
-    movieHtml +=
-        "<div class='movie'>"+
-            "<div style='float:left;width:107px;height:160px;margin-right:10px'>"+
-            "  <a class='do-launch' href='"+movie.url+"' target='_blank'><img src='"+movie.thumbnail+"' /></a>"+
-            "</div>"+
-            "<h4><a class='do-launch' href='"+movie.url+"' target='_blank'>"+movie.title+"</a></h4>"+
-            "<p>"+movie.description+
-              "<div>"+movie.url+"</div>"+
-            "</p>"+
-          "</div>";
+document.getElementById("closeMovieDetail").addEventListener('click', function(event) {
+  event.preventDefault();
+  document.getElementById('movieDetail').classList.remove('active');
+});
+
+let detailsElement = document.getElementById("movieDetail");
+detailsElement.addEventListener('click', function(event:any) {
+  event.preventDefault();
+  const launcher = event.target.closest("a.play-movie");
+  if (!isLaunchable() || !launcher) {
+    return;
   }
-  movieHtml += '</div>';
-  return movieHtml;
-};*/
+  ipc.send<{}>('launcher-data',{responseChannel:'none',params:[launcher.getAttribute("href")]});
+});
 
 let buildLetterNav = function():string {
   let letterNav = "<ul><li><a target='_self' href='#numbers'>0</a></li>";
@@ -78,24 +72,41 @@ let gridView = function(movieGroups:MovieGroup[]):string {
     if (firstChar.match(/\p{Letter}/gu) && !firstChar.match(lastLetterEntry)) {
       movieHtml += '  </div>';
       movieHtml += insertLetterAnchor(firstChar, firstChar);
-      movieHtml += "  <div class='grid-view'>";
+      movieHtml += "<div class='grid-view'>";
       lastLetterEntry = firstChar;
     }
-    if (movieCount == 1) {
-      movieHtml +=
-            "          <div class='movie' style='background-image:url("+movie.thumbnail+")'>"+
-            "            <a class='do-launch' href='"+movie.url+"' target='_blank'></a>"+
-            "            <div class='details'>"+movie.quality+"</div>"+
-            "          </div>";
-    } else {
-      movieHtml +=
-            "          <div class='movie' style='background-image:url("+movie.thumbnail+")'>"+
-            "            <a class='do-launch' href='"+movie.url+"' target='_blank'></a>"+
-            "            <div class='details'>"+movie.quality+" "+movieCount+"</div>"+
-            "          </div>";
-    }
+    movieHtml +=
+          "          <div class='movie' style='background-image:url("+movie.thumbnail+")'>"+
+          "            <a class='show-details' href='#movieDetail_"+movieGroup.id+"'></a>"+
+          "            <div class='detail-strip'>"+movie.quality+((movieCount > 1) ? ' '+movieCount:'')+"</div>"+
+          "            <div id='movieDetail_"+movieGroup.id+"' class='extras'>"+detailView(movieGroup) +"</div>"+
+          "          </div>";
   }
-  movieHtml += '      </div>';
+  movieHtml += '    </div>';
   return movieHtml;
 };
 
+let detailView = function(movieGroup:MovieGroup):string {
+  let movie = movieGroup.movies[0];
+  let movieHtml:string =
+          "<div class='details'>"+
+          "  <div class='image'>"+
+          "    <img src='"+movie.thumbnail+"' />"+
+          "  </div>"+
+          "  <h3>"+movie.title+"</h3>"+
+          "  <p>"+movie.description+"</p>"+
+          "</div>";
+  movieHtml += '<div class="play-button-wrap">'+
+               '  <a class="button do-launch" href="'+movie.url+'" target="_blank">Play</a>'+
+               '</div>';
+  movieHtml += '<ul>';
+  let x = 0;
+  for (let movieEntry of movieGroup.movies) {
+    if (x > 0) {
+      movieHtml += "<li><a class='do-launch' href='"+movieEntry.url+"' target='_blank'>"+movieEntry.title+"</a></li>";
+    }
+    x++;
+  }
+  movieHtml += '</ul>';
+  return movieHtml;
+};

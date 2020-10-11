@@ -2,6 +2,7 @@ import {app, BrowserWindow, ipcMain} from 'electron';
 import {IpcChannelInterface} from "./IPC/IpcChannelInterface";
 import {MoviesChannel} from "./IPC/MoviesChannel";
 import {LauncherChannel} from "./IPC/LauncherChannel";
+
 const { is } = require('electron-util');
 const TouchscreenWindow = require('electron-touchscreen');
 
@@ -34,7 +35,7 @@ class Main {
     this.mainWindow = new TouchscreenWindow({
       show: false,
       frame: false,
-      title: `Movie Launcher`,
+      title: 'Movie Launcher',
       webPreferences: {
         nodeIntegration: true,
         devTools: is.development
