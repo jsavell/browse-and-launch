@@ -33,7 +33,7 @@ document.getElementById("closeMovieDetail").addEventListener('click', function(e
   document.getElementById('movieDetail').classList.remove('active');
 });
 
-let detailsElement = document.getElementById("movieDetail");
+let detailsElement = document.getElementById("movieDetailContent");
 detailsElement.addEventListener('click', function(event:any) {
   event.preventDefault();
   const launcher = event.target;
