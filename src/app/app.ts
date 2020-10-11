@@ -36,7 +36,7 @@ document.getElementById("closeMovieDetail").addEventListener('click', function(e
 let detailsElement = document.getElementById("movieDetail");
 detailsElement.addEventListener('click', function(event:any) {
   event.preventDefault();
-  const launcher = event.target.closest("a.play-movie");
+  const launcher = event.target;
   if (!isLaunchable() || !launcher) {
     return;
   }
@@ -97,13 +97,13 @@ let detailView = function(movieGroup:MovieGroup):string {
           "  <p>"+movie.description+"</p>"+
           "</div>";
   movieHtml += '<div class="play-button-wrap">'+
-               '  <a class="button do-launch" href="'+movie.url+'" target="_blank">Play</a>'+
+               '  <a class="button play-movie" href="'+movie.url+'" target="_blank">Play</a>'+
                '</div>';
   movieHtml += '<ul>';
   let x = 0;
   for (let movieEntry of movieGroup.movies) {
     if (x > 0) {
-      movieHtml += "<li><a class='do-launch' href='"+movieEntry.url+"' target='_blank'>"+movieEntry.title+"</a></li>";
+      movieHtml += "<li><a class='play-movie' href='"+movieEntry.url+"' target='_blank'>"+movieEntry.title+"</a></li>";
     }
     x++;
   }
