@@ -88,6 +88,19 @@ let gridView = function(movieGroups:MovieGroup[]):string {
   return movieHtml;
 };
 
+let getFormattedDate = function(dateString:string):string {
+  let date:Date = new Date(String(dateString));
+  let day = date.getDay().toString();
+  let month = (date.getMonth()+1).toString();
+  if (day.length == 1) {
+    day = '0'+day;
+  }
+  if (month.length == 1) {
+    month = '0'+month;
+  }
+  return day+"/"+month+"/"+date.getFullYear();
+};
+
 let detailView = function(movieGroup:MovieGroup):string {
   let movie = movieGroup.movies[0];
   let movieHtml:string =
@@ -96,6 +109,7 @@ let detailView = function(movieGroup:MovieGroup):string {
           "    <img src='"+movie.thumbnail+"' />"+
           "  </div>"+
           "  <h3>"+movie.title+"</h3>"+
+          "  <em>"+getFormattedDate(movie.releaseDate)+"</em>"+
           "  <p>"+((movie.description) ? movie.description:'')+"</p>"+
           "</div>";
   movieHtml += '<div class="play-button-wrap">'+
