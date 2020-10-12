@@ -90,7 +90,7 @@ let gridView = function(movieGroups:MovieGroup[]):string {
 
 let getFormattedDate = function(dateString:string):string {
   let date:Date = new Date(String(dateString));
-  let day = date.getDay().toString();
+  let day = date.getDate().toString();
   let month = (date.getMonth()+1).toString();
   if (day.length == 1) {
     day = '0'+day;
