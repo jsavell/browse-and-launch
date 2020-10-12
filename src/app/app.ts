@@ -4,8 +4,8 @@ import {MovieGroup} from "../electron/model/MovieGroup";
 
 const ipc = new IpcService();
 
-var isLaunchable = function() {
-  return (process.env.LAUNCH_HOST && process.env.LAUNCH_PORT && process.env.LAUNCH_PARAMS);
+var isLaunchable = function(target:Element) {
+  return (target.className.indexOf("play-movie") !== -1 && process.env.LAUNCH_HOST && process.env.LAUNCH_PORT && process.env.LAUNCH_PARAMS);
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -36,11 +36,13 @@ document.getElementById("closeMovieDetail").addEventListener('click', function(e
 let detailsElement = document.getElementById("movieDetailContent");
 detailsElement.addEventListener('click', function(event:any) {
   event.preventDefault();
+
   const launcher = event.target;
-  if (!isLaunchable() || !launcher) {
-    return;
+
+  if (isLaunchable(launcher)) {
+    ipc.send<{}>('launcher-data',{responseChannel:'none',params:[launcher.getAttribute("href")]});
   }
-  ipc.send<{}>('launcher-data',{responseChannel:'none',params:[launcher.getAttribute("href")]});
+  return;
 });
 
 let buildLetterNav = function():string {
