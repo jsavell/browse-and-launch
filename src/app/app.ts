@@ -98,7 +98,7 @@ let getFormattedDate = function(dateString:string):string {
   if (month.length == 1) {
     month = '0'+month;
   }
-  return day+"/"+month+"/"+date.getFullYear();
+  return month+"/"+day+"/"+date.getFullYear();
 };
 
 let detailView = function(movieGroup:MovieGroup):string {
