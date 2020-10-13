@@ -137,6 +137,7 @@ a {
   height : 100%;
   -webkit-transition: all 1s, -webkit-transform 1s;
   transition: all 1s, transform 1s;
+  z-index: 1000;
 }
 
 #movieDetail.active {
