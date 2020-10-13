@@ -109,7 +109,7 @@ let detailView = function(movieGroup:MovieGroup):string {
           "    <img src='"+movie.thumbnail+"' />"+
           "  </div>"+
           "  <h3>"+movie.title+"</h3>"+
-          "  <em>"+getFormattedDate(movie.releaseDate)+"</em>"+
+          "  <em>"+getFormattedDate(movie.releaseDate)+" - "+movie.quality+"</em>"+
           "  <p>"+((movie.description) ? movie.description:'')+"</p>"+
           "</div>";
   movieHtml += '<div class="play-button-wrap">'+
@@ -119,7 +119,7 @@ let detailView = function(movieGroup:MovieGroup):string {
   let x = 0;
   for (let movieEntry of movieGroup.movies) {
     if (x > 0) {
-      movieHtml += "<li><a class='play-movie' href='"+movieEntry.url+"' target='_blank'>"+movieEntry.title+"</a></li>";
+      movieHtml += "<li><a class='play-movie' href='"+movieEntry.url+"' target='_blank'>"+movieEntry.title+" ["+movieEntry.quality+"]</a></li>";
     }
     x++;
   }
