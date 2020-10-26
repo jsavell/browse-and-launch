@@ -41,7 +41,7 @@ class Main {
         devTools: is.development
       }
     };
-    if (screen.getPrimaryDisplay().touchSupport == 'available') {
+    if (process.env.KIOSK_MODE === 'true') {
       console.log("Launching in kiosk mode");
       this.mainWindow = new TouchscreenWindow(windowConfig);
     } else {
