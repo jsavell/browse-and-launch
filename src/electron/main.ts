@@ -1,4 +1,4 @@
-import {app, BrowserWindow, ipcMain} from 'electron';
+import {app, screen, BrowserWindow, ipcMain} from 'electron';
 import {IpcChannelInterface} from "./IPC/IpcChannelInterface";
 import {MoviesChannel} from "./IPC/MoviesChannel";
 import {LauncherChannel} from "./IPC/LauncherChannel";
@@ -32,7 +32,7 @@ class Main {
   }
 
   private createWindow() {
-    this.mainWindow = new TouchscreenWindow({
+    let windowConfig:any = {
       show: false,
       frame: false,
       title: 'Movie Launcher',
@@ -40,7 +40,14 @@ class Main {
         nodeIntegration: true,
         devTools: is.development
       }
-    });
+    };
+    if (screen.getPrimaryDisplay().touchSupport == 'available') {
+      console.log("Launching in kiosk mode");
+      this.mainWindow = new TouchscreenWindow(windowConfig);
+    } else {
+      console.log("Launching in standard mode");
+      this.mainWindow = new BrowserWindow(windowConfig);
+    }
     this.mainWindow.maximize();
     this.mainWindow.show();
     if (is.development) {
@@ -52,6 +59,7 @@ class Main {
   private registerIpcChannels(ipcChannels: IpcChannelInterface[]) {
     ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, request) => channel.handle(event, request)));
   }
+
 }
 
 (new Main()).init([
