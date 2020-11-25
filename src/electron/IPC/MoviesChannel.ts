@@ -34,8 +34,8 @@ export class MoviesChannel implements IpcChannelInterface {
 	      	let solrData = JSON.parse(data);
 	      	let movieGroupsBuilder:Map<string,MovieGroup> = new Map();
 	      	for (let movieData of solrData.response.docs) {
-						let movie = {title: movieData.title_ss,description: movieData.description_ss,thumbnail: movieData.thumbnail_ss, url: movieData.url_ss, quality: movieData.quality_ss, group: movieData.group_ss, releaseDate: movieData.releaseDate_ss};
-	      		let groupId = movie.url;
+						let movie = {title: movieData.title_ss,description: movieData.description_ss,thumbnail: movieData.thumbnail_ss, playBackId: movieData.playbackid_ss, quality: movieData.quality_ss, group: movieData.group_ss, releaseDate: movieData.releaseDate_ss};
+						let groupId = movie.playBackId;
 
 	      		if (movie.group) {
 	      			groupId = movie.group;

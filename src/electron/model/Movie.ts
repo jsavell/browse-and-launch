@@ -2,7 +2,7 @@ export interface Movie {
   title: string,
   description: string,
   thumbnail: string,
-  url: string,
+  playBackId: string,
   quality: string,
   group: string,
   releaseDate: string

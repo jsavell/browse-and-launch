@@ -16,8 +16,8 @@ export class LauncherChannel implements IpcChannelInterface {
 
     const {net} = require('electron');
 
-    let contentID = encodeURIComponent(request.params[0]);
-    let launchUrl = process.env.LAUNCH_PARAMS.replace('{content-url}',contentID);
+    let contentId = encodeURIComponent(request.params[0]);
+    let launchUrl = process.env.LAUNCH_PARAMS.replace('{contentId}',contentId);
 
     const launchRequest = net.request({
             method: 'POST',

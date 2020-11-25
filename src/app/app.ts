@@ -113,13 +113,13 @@ let detailView = function(movieGroup:MovieGroup):string {
           "  <p>"+((movie.description) ? movie.description:'')+"</p>"+
           "</div>";
   movieHtml += '<div class="play-button-wrap">'+
-               '  <a class="button play-movie" href="'+movie.url+'" target="_blank">Play</a>'+
+               '  <a class="button play-movie" href="'+movie.playBackId+'" target="_blank">Play</a>'+
                '</div>';
   movieHtml += '<ul>';
   let x = 0;
   for (let movieEntry of movieGroup.movies) {
     if (x > 0) {
-      movieHtml += "<li><a class='play-movie' href='"+movieEntry.url+"' target='_blank'>"+movieEntry.title+" ["+movieEntry.quality+"]</a></li>";
+      movieHtml += "<li><a class='play-movie' href='"+movieEntry.playBackId+"' target='_blank'>"+movieEntry.title+" ["+movieEntry.quality+"]</a></li>";
     }
     x++;
   }
